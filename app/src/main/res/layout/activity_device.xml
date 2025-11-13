@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
-    tools:context="MobileAppDevCA2.activities.DeviceActivity">
+    tools:context="ie.setu.mobileAppDevCA2.activities.DeviceActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

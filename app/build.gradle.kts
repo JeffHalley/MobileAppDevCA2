@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "ie.setu.MobileAppDevCA2"
+        applicationId = "ie.setu.mobileAppDevCA2"
         minSdk = 30
         targetSdk = 36
         versionCode = 1
