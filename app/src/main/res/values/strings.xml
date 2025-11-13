@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Iot Devices</string>
+    <string name="button_addDevice">Add Device</string>
+    <string name="hint_DeviceTitle">Device Title</string>
+    <string name="hint_DeviceDescription">Device Description</string>
+    <string name="menu_addDevice">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
+    <string name="update_device">Update Device</string>
+    <string name="delete_all">Delete All</string>
+    <string-array name="device_categories">
+        <item>Sensor Family</item>
+        <item>pH Sensor</item>
+        <item>Temperature Sensor</item>
+        <item>Ultrasonic Sensor</item>
+        <item>Motion Detector</item>
+        <item>Smart Light</item>
+    </string-array>
+
+</resources>
