@@ -9,6 +9,8 @@
     <string name="edit">edit</string>
     <string name="update_device">Update Device</string>
     <string name="delete_all">Delete All</string>
+    <string name="button_addImage"> Add Image </string>
+
     <string-array name="device_categories">
         <item>Sensor Family</item>
         <item>pH Sensor</item>

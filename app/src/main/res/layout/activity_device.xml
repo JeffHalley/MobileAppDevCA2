@@ -136,6 +136,29 @@
                     android:layout_marginTop="4dp"
                     android:background="@android:color/white" />
 
+                <Button
+                    android:id="@+id/chooseImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:importantForAccessibility="no"
+                    android:padding="8dp"
+                    android:text="@string/button_addImage"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <ImageView
+                    android:id="@+id/placemarkImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    tools:ignore="ImageContrastCheck" />
+
+
+
                 <!-- Add / Update Button -->
                 <Button
                     android:id="@+id/btnAdd"

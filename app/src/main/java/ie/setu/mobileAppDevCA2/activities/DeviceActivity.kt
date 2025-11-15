@@ -73,6 +73,11 @@ class DeviceActivity : AppCompatActivity() {
             dialog.show()
         }
 
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
+        }
+
+
         // Save / update device
         binding.btnAdd.setOnClickListener {
             device.title = binding.deviceTitle.text.toString()
