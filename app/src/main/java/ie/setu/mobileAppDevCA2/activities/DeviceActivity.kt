@@ -1,20 +1,43 @@
 package ie.setu.mobileAppDevCA2.activities
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import ie.setu.mobileAppDevCA2.R
 import ie.setu.mobileAppDevCA2.databinding.ActivityDeviceBinding
+import ie.setu.mobileAppDevCA2.helpers.showImagePicker
 import ie.setu.mobileAppDevCA2.main.MainApp
 import ie.setu.mobileAppDevCA2.models.DeviceModel
 import timber.log.Timber.i
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.net.toUri
 
 class DeviceActivity : AppCompatActivity() {
+
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK && result.data != null) {
+                    val uri = result.data!!.data!!
+                    device.image = uri.toString()
+                    Picasso.get()
+                        .load(uri)
+                        .into(binding.deviceImage)
+                }
+            }
+    }
 
     private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
@@ -26,6 +49,9 @@ class DeviceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDeviceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        registerImagePickerCallback()
+
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
@@ -43,6 +69,17 @@ class DeviceActivity : AppCompatActivity() {
         // If editing an existing device
         if (intent.hasExtra("device_edit")) {
             device = intent.extras?.getParcelable("device_edit")!!
+            i("Device to edit: $device")
+            i("Device image: ${device.image}")
+
+            if (device.image.isNotEmpty()) {
+                Picasso.get()
+                    .load(device.image.toUri())
+                    .into(binding.deviceImage)
+            } else {
+                binding.deviceImage.setImageResource(R.drawable.placeholder)
+            }
+
             binding.deviceTitle.setText(device.title)
             binding.deviceDescription.setText(device.description)
             binding.checkActive.isChecked = device.status
@@ -73,8 +110,10 @@ class DeviceActivity : AppCompatActivity() {
             dialog.show()
         }
 
+
         binding.chooseImage.setOnClickListener {
             i("Select image")
+            showImagePicker(imageIntentLauncher)
         }
 
 

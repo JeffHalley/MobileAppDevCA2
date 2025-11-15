@@ -5,7 +5,8 @@
     "description": "Monitors ambient temperature in real time",
     "status": true,
     "activatedAt": "2025-01-10",
-    "sensorFamily": "Temperature"
+    "sensorFamily": "Temperature",
+    "image": ""
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "description": "Measures water acidity for environmental monitoring",
     "status": true,
     "activatedAt": "2024-06-15",
-    "sensorFamily": "pH"
+    "sensorFamily": "pH",
+    "image": ""
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "description": "Used for distance and obstacle detection",
     "status": false,
     "activatedAt": "2025-03-01",
-    "sensorFamily": "Ultrasonic"
+    "sensorFamily": "Ultrasonic",
+    "image": ""
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "description": "IoT-controlled LED light with adjustable brightness",
     "status": true,
     "activatedAt": "2023-11-05",
-    "sensorFamily": "Lighting"
+    "sensorFamily": "Lighting",
+    "image": ""
   },
   {
     "id": 5,
@@ -37,6 +41,7 @@
     "description": "Triggers events based on movement detection",
     "status": false,
     "activatedAt": "2025-09-20",
-    "sensorFamily": "Motion"
+    "sensorFamily": "Motion",
+    "image": ""
   }
 ]

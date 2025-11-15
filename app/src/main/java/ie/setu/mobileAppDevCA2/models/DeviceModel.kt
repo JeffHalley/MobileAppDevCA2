@@ -1,5 +1,6 @@
 package ie.setu.mobileAppDevCA2.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -10,5 +11,6 @@ data class DeviceModel(
     var description: String = "",
     var status: Boolean = false,
     var activatedAt: String = "",
-    var sensorFamily: String = ""
+    var sensorFamily: String = "",
+    var image: String = ""
 ) : Parcelable
