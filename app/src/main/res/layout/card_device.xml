@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- Edit Button Top Right -->
         <ImageButton
             android:id="@+id/btnEditCard"
             android:layout_width="40dp"
@@ -26,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/colorAccent" />
 
+        <!-- Delete Button Below Edit -->
         <ImageButton
             android:id="@+id/btnDeleteCard"
             android:layout_width="40dp"
@@ -35,10 +36,10 @@
             android:padding="8dp"
             android:src="@android:drawable/ic_menu_delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/btnEditCard"
             app:layout_constraintTop_toBottomOf="@id/btnEditCard"
             app:tint="@android:color/holo_red_light" />
 
+        <!-- Device Title -->
         <TextView
             android:id="@+id/deviceTitle"
             android:layout_width="0dp"
@@ -49,11 +50,11 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/btnEditCard"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Iot Device Name" />
 
+        <!-- Activated At -->
         <TextView
             android:id="@+id/deviceActivatedAt"
             android:layout_width="0dp"
@@ -66,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/deviceTitle"
             tools:text="Activated: 2025-10-18" />
 
+        <!-- Sensor Family -->
         <TextView
             android:id="@+id/deviceSensorFamily"
             android:layout_width="0dp"
@@ -78,15 +80,26 @@
             app:layout_constraintTop_toBottomOf="@id/deviceActivatedAt"
             tools:text="Sensor: pH Sensor" />
 
-        <!-- Status Indicator Bottom Right -->
+        <!-- Device Image Below Sensor Family -->
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/change_device_image"
+            app:layout_constraintStart_toStartOf="@id/deviceTitle"
+            app:layout_constraintTop_toBottomOf="@id/deviceSensorFamily"
+            tools:srcCompat="@mipmap/ic_launcher" />
+
+        <!-- Status Indicator Below Image -->
         <View
             android:id="@+id/statusIndicator"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/circle_shape"
-            app:layout_constraintTop_toBottomOf="@id/deviceSensorFamily"
-            app:layout_constraintStart_toStartOf="@id/deviceTitle" />
+            app:layout_constraintStart_toStartOf="@id/deviceTitle"
+            app:layout_constraintTop_toBottomOf="@id/imageIcon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

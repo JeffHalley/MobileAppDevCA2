@@ -54,6 +54,21 @@ class DeviceActivity : AppCompatActivity() {
 
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
+
+        val editing = intent.hasExtra("device_edit")
+
+        binding.toolbarAdd.title =
+            if (editing) getString(R.string.update_device)
+            else getString(R.string.button_addDevice)
+
+        binding.btnAdd.text =
+            if (editing) getString(R.string.update_device)
+            else getString(R.string.button_addDevice)
+
+        binding.chooseImage.text =
+            if (editing) getString(R.string.change_device_image)
+            else getString(R.string.button_addImage)
+
         app = application as MainApp
 
         // Populate dropdown (spinner)
@@ -86,9 +101,7 @@ class DeviceActivity : AppCompatActivity() {
             binding.dateText.text = device.activatedAt.ifEmpty { "Select date" }
             val position = families.indexOf(device.sensorFamily)
             if (position >= 0) binding.categorySpinner.setSelection(position)
-            binding.btnAdd.setText(R.string.update_device)
         } else {
-            binding.btnAdd.setText(R.string.button_addDevice)
         }
 
         // Date picker

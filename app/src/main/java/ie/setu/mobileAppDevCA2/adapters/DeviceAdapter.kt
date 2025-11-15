@@ -3,6 +3,9 @@ package ie.setu.mobileAppDevCA2.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import ie.setu.mobileAppDevCA2.R
+import ie.setu.mobileAppDevCA2.R.drawable.placeholder
 import ie.setu.mobileAppDevCA2.databinding.CardDeviceBinding
 import ie.setu.mobileAppDevCA2.models.DeviceModel
 
@@ -46,6 +49,14 @@ class DeviceAdapter(
                 "no family available"
             }
 
+            if (device.image.isNotEmpty()) {
+                Picasso.get()
+                    .load(device.image)
+                    .resize(200, 200)
+                    .into(binding.imageIcon)
+            } else {
+                binding.imageIcon.setImageResource(placeholder) // placeholder
+            }
 
             val colorRes =
                 if (device.status) android.R.color.holo_green_light else android.R.color.holo_red_light
