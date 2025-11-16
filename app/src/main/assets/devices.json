@@ -6,7 +6,10 @@
     "status": true,
     "activatedAt": "2025-01-10",
     "sensorFamily": "Temperature",
-    "image": ""
+    "image": "",
+    "lat": 52.520008,
+    "lng": 13.404954,
+    "zoom": 15.0
   },
   {
     "id": 2,
@@ -15,7 +18,10 @@
     "status": true,
     "activatedAt": "2024-06-15",
     "sensorFamily": "pH",
-    "image": ""
+    "image": "",
+    "lat": 35.689487,
+    "lng": 139.691711,
+    "zoom": 14.5
   },
   {
     "id": 3,
@@ -24,7 +30,10 @@
     "status": false,
     "activatedAt": "2025-03-01",
     "sensorFamily": "Ultrasonic",
-    "image": ""
+    "image": "",
+    "lat": -33.868820,
+    "lng": 151.209290,
+    "zoom": 16.0
   },
   {
     "id": 4,
@@ -33,7 +42,10 @@
     "status": true,
     "activatedAt": "2023-11-05",
     "sensorFamily": "Lighting",
-    "image": ""
+    "image": "",
+    "lat": 40.712776,
+    "lng": -74.005974,
+    "zoom": 15.5
   },
   {
     "id": 5,
@@ -42,6 +54,9 @@
     "status": false,
     "activatedAt": "2025-09-20",
     "sensorFamily": "Motion",
-    "image": ""
+    "image": "",
+    "lat": -23.550520,
+    "lng": -46.633308,
+    "zoom": 14.0
   }
 ]
