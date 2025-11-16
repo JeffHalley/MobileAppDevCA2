@@ -35,6 +35,9 @@ class DeviceMemStore(private val context: Context) : DeviceStore {
             foundDevice.activatedAt = device.activatedAt
             foundDevice.sensorFamily = device.sensorFamily
             foundDevice.image = device.image
+            foundDevice.lat = device.lat
+            foundDevice.lng = device.lng
+            foundDevice.zoom = device.zoom
             save()
             logAll()
         }

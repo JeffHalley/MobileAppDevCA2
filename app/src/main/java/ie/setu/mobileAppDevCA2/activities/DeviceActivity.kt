@@ -30,9 +30,24 @@ class DeviceActivity : AppCompatActivity() {
 
     private fun registerMapCallback() {
         mapIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK && result.data != null) {
+                    i("Got Location ${result.data.toString()}")
+                    // Get updated coordinates from MapActivity
+                    val lat = result.data!!.getDoubleExtra("lat", device.lat)
+                    val lng = result.data!!.getDoubleExtra("lng", device.lng)
+                    val zoom = result.data!!.getFloatExtra("zoom", device.zoom)
+
+                    device.lat = lat
+                    device.lng = lng
+                    device.zoom = zoom
+
+                    i("Updated device location: lat=$lat, lng=$lng, zoom=$zoom")
+                }
+            }
     }
+
+
 
 
     private fun registerImagePickerCallback() {
@@ -141,10 +156,15 @@ class DeviceActivity : AppCompatActivity() {
 
 
         binding.deviceLocation.setOnClickListener {
-            i ("Set Location Pressed")
-            val launcherIntent = Intent(this, MapActivity::class.java)
+            val launcherIntent = Intent(this, MapActivity::class.java).apply {
+                putExtra("lat", device.lat)
+                putExtra("lng", device.lng)
+                putExtra("zoom", device.zoom)
+            }
             mapIntentLauncher.launch(launcherIntent)
         }
+
+
 
 
         // Save / update device
