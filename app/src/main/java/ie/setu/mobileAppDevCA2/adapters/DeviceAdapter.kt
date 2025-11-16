@@ -55,7 +55,7 @@ class DeviceAdapter(
                     .resize(200, 200)
                     .into(binding.imageIcon)
             } else {
-                binding.imageIcon.setImageResource(placeholder) // placeholder
+                binding.imageIcon.setImageResource(placeholder)
             }
 
             val colorRes =

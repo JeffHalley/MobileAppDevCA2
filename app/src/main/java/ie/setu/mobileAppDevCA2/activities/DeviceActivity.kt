@@ -20,10 +20,19 @@ import timber.log.Timber.i
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.core.net.toUri
+import ie.setu.mobileAppDevCA2.activities.MapActivity
+
 
 class DeviceActivity : AppCompatActivity() {
 
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
+    }
 
 
     private fun registerImagePickerCallback() {
@@ -51,6 +60,7 @@ class DeviceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         registerImagePickerCallback()
+        registerMapCallback()
 
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
@@ -127,6 +137,13 @@ class DeviceActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             i("Select image")
             showImagePicker(imageIntentLauncher)
+        }
+
+
+        binding.deviceLocation.setOnClickListener {
+            i ("Set Location Pressed")
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
         }
 
 
