@@ -46,6 +46,11 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
                 val launcherIntent = Intent(this, DeviceActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, DeviceMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+
+            }
 
             R.id.item_delete_all -> {
                 AlertDialog.Builder(this)
@@ -79,6 +84,11 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
             }
         }
     }
+
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
 
     private val getResult =
         registerForActivityResult(

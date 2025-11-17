@@ -20,6 +20,7 @@ playServicesMaps = "19.2.0"
 
 
 
+
 [libraries]
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

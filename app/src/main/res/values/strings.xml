@@ -13,7 +13,7 @@
     <string name="select_device_image">Select placemark image</string>
     <string name="change_device_image">Choose new placemark image</string>
     <string name="button_location">Set Location</string>
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_device_map">Map of All devices</string>
 
     <string-array name="device_categories">
         <item>Sensor Family</item>
@@ -23,5 +23,6 @@
         <item>Motion Detector</item>
         <item>Smart Light</item>
     </string-array>
+
 
 </resources>
