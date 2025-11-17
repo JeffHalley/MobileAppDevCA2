@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,7 @@ import ie.setu.mobileAppDevCA2.activities.MapActivity
 
 class DeviceActivity : AppCompatActivity() {
 
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     private fun registerMapCallback() {
@@ -51,17 +52,25 @@ class DeviceActivity : AppCompatActivity() {
 
 
     private fun registerImagePickerCallback() {
-        imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK && result.data != null) {
-                    val uri = result.data!!.data!!
-                    device.image = uri.toString()
-                    Picasso.get()
-                        .load(uri)
-                        .into(binding.deviceImage)
-                }
+        imageIntentLauncher = registerForActivityResult(
+            ActivityResultContracts.PickVisualMedia()
+        ) { uri ->
+            if (uri == null) return@registerForActivityResult
+            try {
+                contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                device.image = uri.toString()
+                Picasso.get()
+                    .load(uri)
+                    .into(binding.deviceImage)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
+        }
     }
+
 
     private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
@@ -150,9 +159,13 @@ class DeviceActivity : AppCompatActivity() {
 
 
         binding.chooseImage.setOnClickListener {
-            i("Select image")
-            showImagePicker(imageIntentLauncher)
+            // showImagePicker(imageIntentLauncher,this)
+            val request = PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                .build()
+            imageIntentLauncher.launch(request)
         }
+
 
 
         binding.deviceLocation.setOnClickListener {
