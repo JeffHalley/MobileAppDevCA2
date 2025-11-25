@@ -80,6 +80,18 @@ class DeviceMemStore(private val context: Context) : DeviceStore {
         }
     }
 
+    fun loadFromJson(jsonString: String) {
+        try {
+            devices = gson.fromJson(jsonString, listType)
+            i("Loaded ${devices.size} devices from provided JSON")
+            save() //save to internal storage
+        } catch (ex: Exception) {
+            i("Error parsing JSON: ${ex.message}. Falling back to assets.")
+            loadFromAssets()
+        }
+    }
+
+
     private fun loadFromAssets() {
         try {
             i("Opening devices.json from assets...")

@@ -32,12 +32,23 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    // <<< FIX FOR DUPLICATE META-INF FILES >>>
+    packagingOptions {
+        resources {
+            pickFirsts.add("META-INF/INDEX.LIST")
+            pickFirsts.add("META-INF/DEPENDENCIES")
+            pickFirsts.add("META-INF/io.netty.versions.properties")
+        }
     }
 }
 
@@ -56,4 +67,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.gson)
     implementation(libs.picasso)
+    implementation(platform(libs.bom))
+    implementation(libs.auth)
+    implementation(libs.core)
+    implementation(libs.aws.android.sdk.lambda)
 }
+

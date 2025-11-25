@@ -1,5 +1,8 @@
 [versions]
 agp = "8.13.1"
+awsAndroidSdkLambda = "2.81.1"
+awsAndroidSdkLambdaVersion = "2.39.3"
+bom = "2.39.3"
 cardview = "1.0.0"
 gson = "2.13.2"
 kotlin = "2.2.20"
@@ -25,6 +28,12 @@ playServicesMaps = "19.2.0"
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+aws-android-sdk-lambda = { module = "com.amazonaws:aws-android-sdk-lambda", version.ref = "awsAndroidSdkLambda" }
+aws-android-sdk-lambda-v2393 = { module = "com.amazonaws:aws-android-sdk-lambda", version.ref = "awsAndroidSdkLambdaVersion" }
+bom = { module = "software.amazon.awssdk:bom", version.ref = "bom" }
+core = { module = "software.amazon.awssdk:core", version.ref = "bom" }
+lambda = { module = "software.amazon.awssdk:lambda", version.ref = "bom" }
+auth = { module = "software.amazon.awssdk:auth", version.ref = "bom" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

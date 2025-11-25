@@ -15,6 +15,6 @@ class MainApp : Application() {
         i("Device app started")
 
         devices = DeviceMemStore(this)
-        devices.load()
+        //devices.load()
     }
 }
