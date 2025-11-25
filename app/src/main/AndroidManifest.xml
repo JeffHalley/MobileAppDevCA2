@@ -16,6 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Placemark"
         tools:targetApi="34">
+
+
+        <activity
+            android:name=".activities.LandingPageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activities.DeviceMapsView"
             android:exported="false"
@@ -32,11 +43,6 @@
         <activity
             android:name=".activities.DeviceListView"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
