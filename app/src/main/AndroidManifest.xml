@@ -42,7 +42,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".activities.DeviceActivity">
+        <activity android:name=".activities.DeviceView">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

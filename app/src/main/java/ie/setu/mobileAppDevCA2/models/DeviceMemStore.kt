@@ -109,4 +109,11 @@ class DeviceMemStore(private val context: Context) : DeviceStore {
     private fun logAll() {
         devices.forEach { i("Device: $it") }
     }
+
+    override fun findById(id:Long) : DeviceModel? {
+        val foundDevice: DeviceModel? = devices.find { it.id == id }
+        return foundDevice
+    }
+
+
 }

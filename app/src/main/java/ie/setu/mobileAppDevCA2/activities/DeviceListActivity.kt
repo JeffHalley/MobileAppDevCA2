@@ -43,7 +43,7 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, DeviceActivity::class.java)
+                val launcherIntent = Intent(this, DeviceView::class.java)
                 getResult.launch(launcherIntent)
             }
             R.id.item_map -> {
@@ -103,7 +103,7 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
         }
 
     override fun onDeviceClick(device: DeviceModel) {
-        val launcherIntent = Intent(this, DeviceActivity::class.java)
+        val launcherIntent = Intent(this, DeviceView::class.java)
         launcherIntent.putExtra("device_edit", device)
         getClickResult.launch(launcherIntent)
     }

@@ -7,6 +7,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
+import ie.setu.mobileAppDevCA2.R
 import ie.setu.mobileAppDevCA2.databinding.ActivityDeviceMapsBinding
 import ie.setu.mobileAppDevCA2.databinding.ContentDeviceMapsBinding
 import ie.setu.mobileAppDevCA2.main.MainApp
@@ -71,7 +73,22 @@ class DeviceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        contentBinding.currentTitle.text = marker.title
+        val tag = marker.tag as Long
+        val device = app.devices.findById(tag)
+
+        contentBinding.currentTitle.text = device!!.title
+        contentBinding.currentDescription.text = device.description
+
+        // Only load image if path is not empty
+        if (device.image.isNotEmpty()) {
+            Picasso.get()
+                .load(device.image)
+                .placeholder(R.drawable.ic_launcher_foreground) // optional placeholder
+                .error(R.drawable.ic_launcher_foreground)      // fallback on error
+                .into(contentBinding.currentImage)
+        } else {
+            contentBinding.currentImage.setImageResource(R.drawable.ic_launcher_foreground)
+        }
 
         return false
     }

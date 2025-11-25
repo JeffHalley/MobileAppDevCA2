@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,17 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import ie.setu.mobileAppDevCA2.R
 import ie.setu.mobileAppDevCA2.databinding.ActivityDeviceBinding
-import ie.setu.mobileAppDevCA2.helpers.showImagePicker
 import ie.setu.mobileAppDevCA2.main.MainApp
 import ie.setu.mobileAppDevCA2.models.DeviceModel
 import timber.log.Timber.i
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.core.net.toUri
-import ie.setu.mobileAppDevCA2.activities.MapActivity
 
-
-class DeviceActivity : AppCompatActivity() {
+class DeviceView : AppCompatActivity() {
 
     private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
@@ -48,9 +46,6 @@ class DeviceActivity : AppCompatActivity() {
             }
     }
 
-
-
-
     private fun registerImagePickerCallback() {
         imageIntentLauncher = registerForActivityResult(
             ActivityResultContracts.PickVisualMedia()
@@ -65,12 +60,12 @@ class DeviceActivity : AppCompatActivity() {
                 Picasso.get()
                     .load(uri)
                     .into(binding.deviceImage)
+                binding.chooseImage.text = getString(R.string.change_device_image)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-
 
     private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
@@ -107,7 +102,7 @@ class DeviceActivity : AppCompatActivity() {
 
         // Populate dropdown (spinner)
         val families = listOf("Temperature", "pH", "Ultrasonic", "Lighting", "Motion")
-        val adapter = android.widget.ArrayAdapter(
+        val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
             families
@@ -135,7 +130,6 @@ class DeviceActivity : AppCompatActivity() {
             binding.dateText.text = device.activatedAt.ifEmpty { "Select date" }
             val position = families.indexOf(device.sensorFamily)
             if (position >= 0) binding.categorySpinner.setSelection(position)
-        } else {
         }
 
         // Date picker
@@ -157,7 +151,6 @@ class DeviceActivity : AppCompatActivity() {
             dialog.show()
         }
 
-
         binding.chooseImage.setOnClickListener {
             // showImagePicker(imageIntentLauncher,this)
             val request = PickVisualMediaRequest.Builder()
@@ -165,8 +158,6 @@ class DeviceActivity : AppCompatActivity() {
                 .build()
             imageIntentLauncher.launch(request)
         }
-
-
 
         binding.deviceLocation.setOnClickListener {
             val launcherIntent = Intent(this, MapActivity::class.java).apply {
@@ -176,9 +167,6 @@ class DeviceActivity : AppCompatActivity() {
             }
             mapIntentLauncher.launch(launcherIntent)
         }
-
-
-
 
         // Save / update device
         binding.btnAdd.setOnClickListener {
@@ -206,6 +194,54 @@ class DeviceActivity : AppCompatActivity() {
                 Snackbar.make(it, "Incomplete Data", Snackbar.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun showDevice(device: DeviceModel) {
+        binding.deviceTitle.setText(device.title)
+        binding.deviceDescription.setText(device.description)
+        binding.checkActive.isChecked = device.status
+        binding.dateText.text = device.activatedAt.ifEmpty { "Select date" }
+
+        if (device.image.isNotEmpty()) {
+            try {
+                Picasso.get().load(Uri.parse(device.image)).into(binding.deviceImage)
+                binding.chooseImage.text = getString(R.string.change_device_image)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                binding.deviceImage.setImageResource(R.drawable.placeholder)
+            }
+        } else {
+            binding.deviceImage.setImageResource(R.drawable.placeholder)
+        }
+    }
+
+    fun updateImage(uri: Uri) {
+        try {
+            Picasso.get().load(uri).into(binding.deviceImage)
+            binding.chooseImage.text = getString(R.string.change_device_image)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun updateDateDisplay(date: String) {
+        binding.dateText.text = date
+    }
+
+    fun showDatePicker(callback: (Calendar) -> Unit) {
+        val c = Calendar.getInstance()
+        val dialog = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val selected = Calendar.getInstance()
+                selected.set(year, month, dayOfMonth)
+                callback(selected)
+            },
+            c.get(Calendar.YEAR),
+            c.get(Calendar.MONTH),
+            c.get(Calendar.DAY_OF_MONTH)
+        )
+        dialog.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
