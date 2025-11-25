@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Placemark"
         tools:targetApi="34">
         <activity
-            android:name=".activities.DeviceMapsActivity"
+            android:name=".activities.DeviceMapsView"
             android:exported="false"
             android:theme="@style/Theme.Placemark" />
 
@@ -26,11 +26,11 @@
             android:value="@string/MAPS_API_KEY" />
 
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".activities.EditLocationView"
             android:exported="false"
             android:label="@string/title_activity_device_map" />
         <activity
-            android:name=".activities.DeviceListActivity"
+            android:name=".activities.DeviceListView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

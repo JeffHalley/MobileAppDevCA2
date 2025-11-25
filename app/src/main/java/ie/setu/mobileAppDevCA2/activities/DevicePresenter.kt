@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import ie.setu.mobileAppDevCA2.main.MainApp
 import ie.setu.mobileAppDevCA2.models.DeviceModel
 import timber.log.Timber
@@ -48,7 +47,7 @@ class DevicePresenter(private val view: DeviceView) {
     }
 
     fun doSetLocation() {
-        val launcherIntent = Intent(view, MapActivity::class.java)
+        val launcherIntent = Intent(view, EditLocationView::class.java)
             .putExtra("lat", device.lat)
             .putExtra("lng", device.lng)
             .putExtra("zoom", device.zoom)

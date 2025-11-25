@@ -160,7 +160,7 @@ class DeviceView : AppCompatActivity() {
         }
 
         binding.deviceLocation.setOnClickListener {
-            val launcherIntent = Intent(this, MapActivity::class.java).apply {
+            val launcherIntent = Intent(this, EditLocationView::class.java).apply {
                 putExtra("lat", device.lat)
                 putExtra("lng", device.lng)
                 putExtra("zoom", device.zoom)

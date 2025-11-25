@@ -16,7 +16,7 @@ import ie.setu.mobileAppDevCA2.databinding.ActivityDeviceListBinding
 import ie.setu.mobileAppDevCA2.main.MainApp
 import ie.setu.mobileAppDevCA2.models.DeviceModel
 
-class DeviceListActivity : AppCompatActivity(), DeviceListener {
+class DeviceListView : AppCompatActivity(), DeviceListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityDeviceListBinding
@@ -47,7 +47,7 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
                 getResult.launch(launcherIntent)
             }
             R.id.item_map -> {
-                val launcherIntent = Intent(this, DeviceMapsActivity::class.java)
+                val launcherIntent = Intent(this, DeviceMapsView::class.java)
                 mapIntentLauncher.launch(launcherIntent)
 
             }
