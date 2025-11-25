@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber.i
 import java.nio.ByteBuffer
+import java.security.MessageDigest
 
 class LandingPageActivity : AppCompatActivity() {
 
@@ -59,6 +60,11 @@ class LandingPageActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    fun sha256(input: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
+        return bytes.joinToString("") { "%02x".format(it) }
+    }
+
 
     private fun callLambda(username: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -74,10 +80,14 @@ class LandingPageActivity : AppCompatActivity() {
                     ))
                 }
 
+                val hashedPassword = sha256(password)
+                i("Hashed password: $hashedPassword")
+
+
                 val payload: String = """
                     {
                         "UserName": "$username",
-                        "Password": "$password"
+                        "Password": "$hashedPassword"
                     }
                 """.trimIndent()
 
