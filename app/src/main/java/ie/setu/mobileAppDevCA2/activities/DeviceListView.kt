@@ -70,20 +70,28 @@ class DeviceListView : AppCompatActivity(), DeviceListener {
     }
 
     override fun onDeviceDelete(device: DeviceModel) {
-        val position = app.devices.findAll().indexOf(device)
-        if (position != -1) {
-            app.devices.delete(device)
 
-            val adapter = binding.recyclerView.adapter
-            if (app.devices.findAll().isEmpty()) {
-                // If list is now empty, notify full change
-                adapter?.notifyDataSetChanged()
-            } else {
-                // Otherwise, notify the removed position
-                adapter?.notifyItemRemoved(position)
+        AlertDialog.Builder(this)
+            .setTitle("Delete Device")
+            .setMessage("Are you sure you want to delete ${device.title}?")
+            .setPositiveButton("Yes") { _, _ ->
+
+                val position = app.devices.findAll().indexOf(device)
+                if (position != -1) {
+                    app.devices.delete(device)
+
+                    val adapter = binding.recyclerView.adapter
+                    if (app.devices.findAll().isEmpty()) {
+                        adapter?.notifyDataSetChanged()
+                    } else {
+                        adapter?.notifyItemRemoved(position)
+                    }
+                }
             }
-        }
+            .setNegativeButton("No", null)
+            .show()
     }
+
 
     private val mapIntentLauncher =
         registerForActivityResult(
