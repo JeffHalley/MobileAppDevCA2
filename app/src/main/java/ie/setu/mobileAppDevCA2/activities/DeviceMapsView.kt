@@ -71,4 +71,16 @@ class DeviceMapsView : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         contentBinding.mapView.onSaveInstanceState(outState)
     }
+
+    fun showWeatherInfo(temp: Double, wind: Double) {
+        contentBinding.currentWeather.text = "Temp: $temp°C  |  Wind: $wind km/h"
+    }
+
+    fun showWeatherInfoError(errorMessage: String){
+        contentBinding.currentWeather.text = "Weather unavailable: $errorMessage"
+    }
+
+
+
+
 }
