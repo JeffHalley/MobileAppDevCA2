@@ -15,6 +15,19 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_device_map">Map of All devices</string>
     <string name="username">Username</string>
+    <string name="weather_info">
+    Temp: %1$.1f°C\n
+    Wind: %2$.1f km/h (%3$.0f°)\n
+    Humidity: %4$.0f%%\n
+    Pressure: %5$.0f hPa\n
+    Cloud cover: %6$.0f%%\n
+    UV index: %7$.1f
+    </string>
+
+    <string name="weather_error">Weather unavailable: %1$s</string>
+    <string name="tap_marker_for_title">Tap Marker For Title</string>
+    <string name="tap_marker_for_description">Tap Marker For Description</string>
+
 
     <string-array name="device_categories">
         <item>Sensor Family</item>

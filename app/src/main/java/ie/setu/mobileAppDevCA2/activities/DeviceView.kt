@@ -101,7 +101,7 @@ class DeviceView : AppCompatActivity() {
         app = application as MainApp
 
         // Populate dropdown (spinner)
-        val families = listOf("Temperature", "pH", "Ultrasonic", "Lighting", "Motion")
+        val families = resources.getStringArray(R.array.device_categories).toList()
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -248,7 +248,6 @@ class DeviceView : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_device, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> finish()

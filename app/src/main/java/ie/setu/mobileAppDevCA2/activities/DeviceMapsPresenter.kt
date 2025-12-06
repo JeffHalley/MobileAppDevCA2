@@ -49,19 +49,31 @@ class DeviceMapsPresenter(private val view: DeviceMapsView) : GoogleMap.OnMarker
 
     fun fetchWeatherFor(device: DeviceModel) {
         val url =
-            "https://api.open-meteo.com/v1/forecast?latitude=${device.lat}&longitude=${device.lng}&current_weather=true"
+            "https://api.open-meteo.com/v1/forecast?" +
+                    "latitude=${device.lat}&longitude=${device.lng}" +
+                    "&current_weather=true" +
+                    "&hourly=relativehumidity_2m,pressure_msl,cloudcover,uv_index"
 
         val queue = Volley.newRequestQueue(view)
         val request = StringRequest(
             Request.Method.GET, url,
             { response ->
-                val json = JSONObject(response)
-                val weather = json.getJSONObject("current_weather")
+                try {
+                    val json = JSONObject(response)
+                    val current = json.getJSONObject("current_weather")
+                    val temp = current.getDouble("temperature")
+                    val wind = current.getDouble("windspeed")
+                    val windDir = current.getDouble("winddirection")
+                    val hourly = json.getJSONObject("hourly")
+                    val humidity = hourly.getJSONArray("relativehumidity_2m").getDouble(0)
+                    val pressure = hourly.getJSONArray("pressure_msl").getDouble(0)
+                    val cloudcover = hourly.getJSONArray("cloudcover").getDouble(0)
+                    val uv = hourly.getJSONArray("uv_index").getDouble(0)
 
-                val temp = weather.getDouble("temperature")
-                val wind = weather.getDouble("windspeed")
-
-                view.showWeatherInfo(temp, wind)
+                    view.showWeatherInfo(temp, wind, windDir, humidity, pressure, cloudcover, uv)
+                } catch (e: Exception) {
+                    view.showWeatherInfoError(e.message ?: "Parsing error")
+                }
             },
             { error ->
                 view.showWeatherInfoError(error.toString())
@@ -69,5 +81,6 @@ class DeviceMapsPresenter(private val view: DeviceMapsView) : GoogleMap.OnMarker
 
         queue.add(request)
     }
+
 
 }
